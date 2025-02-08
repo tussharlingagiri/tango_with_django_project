@@ -8,8 +8,11 @@
 {% block body_block %}
     <h1>Rango says...</h1>
     <div>
-        hey there partner! <br />
-        <strong>{{ boldmessage }}</strong><br />
+        {% if user.is_authenticated %}
+           <h2> howdy {{ user.username }}!</h2>
+        {% else %}
+           <h2> hey there partner!</h2>
+        {% endif %}
     </div>
     <div>
         {% if categories %}
@@ -56,9 +59,12 @@
         <a href="{% url 'rango:about' %}">About</a><br />
         <img src="{% static 'images/rango.jpg' %}" alt="Picture of Rango" />
     </div>
+
+    {% if user.is_authenticated %}
     <div>
         <a href="{% url 'rango:add_category' %}">Add a New Category</a><br />
     </div>
+    {% endif %}
 {% endblock %}
 
 

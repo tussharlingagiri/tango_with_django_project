@@ -1,5 +1,7 @@
 from django.urls import path
 from rango import views
+from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LogoutView
 
 app_name = 'rango'
 
@@ -13,5 +15,8 @@ urlpatterns = [
     path('register/', views.register, name='register'),
     path('login/', views.user_login, name='login'),
     path('restricted/', views.restricted, name='restricted'),
-    path('logout/', views.user_logout, name='logout'),
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('accounts/password/change/', auth_views.PasswordChangeView.as_view(template_name='registration/password_change_form.html'), name='password_change'),
+    path('accounts/password/change/done/', auth_views.PasswordChangeDoneView.as_view(template_name='registration/password_change_done.html'), name='password_change_done'),
+    
 ]

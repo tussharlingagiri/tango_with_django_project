@@ -32,12 +32,18 @@
                         <a href="{% url 'rango:restricted' %}">Restricted Page</a>
                     </li>
                     <li>
-                        <a href="{% url 'rango:logout' %}">Logout</a>
+                        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
+                    <li>
+                        <a href="{% url 'password_change' %}">Change Password</a>
                     </li>
                 {% else %}
-                    <li><a href="{% url 'rango:register' %}">Sign Up</a></li>
+                    <li><a href="{% url 'registration_register' %}">Sign Up</a></li>
                     <li>
-                        <a href="{% url 'rango:login' %}">Login</a>
+                        <a href="{% url 'login' %}">Login</a>
                     </li>
                 {% endif %}
                 

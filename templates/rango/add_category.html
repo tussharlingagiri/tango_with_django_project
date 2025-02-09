@@ -1,32 +1,45 @@
-{% extends "rango/base.html"%}
+{% extends "rango/base.html" %}
+
 {% load static %}
 
 {% block title_block %}
-Add a Category
+    Add a Category
 {% endblock %}
 
 {% block body_block %}
-    <h1>Add a Category</h1>
-    <div>
-        <form id="category_form" method="post" action="{% url 'rango:add_category' %}"
-            {% csrf_token %}
-            {% for hidden in form.hidden_fields %}
-                {{ hidden }}
-            {% endfor %}
-            {% for field in form.visible_fields %}
-                {{ field.errors }}
-                {{ field.help_text }}
-                {{ field}}
-            {% endfor %}
-            <input type="submit" name="submit" value="Create Category" />
-        </form>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow-lg p-4">
+                <h2 class="text-center mb-4">Add a Category</h2>
+                
+                <form id="category_form" method="post" action="{% url 'rango:add_category' %}">
+                    {% csrf_token %}
+                    
+                    {% for hidden in form.hidden_fields %}
+                        {{ hidden }}
+                    {% endfor %}
+                    {% for field in form.visible_fields %}
+                        <div class="form-group">
+                            {{ field.label_tag }}
+                            {{ field }}
+                            <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% if field.errors %}
+                                <div class="alert alert-danger mt-1">
+                                    {{ field.errors }}
+                                </div>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                    <button class="btn btn-primary btn-block" type="submit" name="submit">Create Category</button>
+                </form>
+            </div>
+
+            <div class="text-center mt-3">
+                <a href="{% url 'rango:index' %}" class="btn btn-outline-secondary">Return to Index</a>
+            </div>
+        </div>
     </div>
-    <div>
-        <a href="{% url 'rango:index' %}">Return to Index</a>
-    </div>
+</div>
 {% endblock %}
-
-
-
-
-

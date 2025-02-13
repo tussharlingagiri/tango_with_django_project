@@ -24,15 +24,36 @@
         <hr />
         <div>
             <ul>
-                <li>
-                    <a href="{% url 'rango:add_category' %}">Add a New Category</a>
-                </li>
-                <li>
-                    <a href="{% url 'rango:about' %}">About</a>
-                </li>
-                <li>
-                    <a href="{% url 'rango:index' %}">Index</a>
-                </li>
+                {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'rango:add_category' %}">Add a New Category</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'rango:restricted' %}">Restricted Page</a>
+                    </li>
+                    <li>
+                        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                            {% csrf_token %}
+                            <button type="submit">Logout</button>
+                        </form>
+                    </li>
+                    <li>
+                        <a href="{% url 'password_change' %}">Change Password</a>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'registration_register' %}">Sign Up</a></li>
+                    <li>
+                        <a href="{% url 'login' %}">Login</a>
+                    </li>
+                {% endif %}
+                
+                    <li>
+                        <a href="{% url 'rango:about' %}">About</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'rango:index' %}">Index</a>
+                    </li>
+               
             </ul>
         </div>
         

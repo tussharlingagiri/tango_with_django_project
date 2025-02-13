@@ -19,9 +19,13 @@ from django.contrib import admin
 from django.urls import path
 from django.urls import include
 from rango import views
+from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
-    path('rango/', include('rango.urls')),  
+    path('accounts/logout/', LogoutView.as_view(template_name='registration/logout.html'), name='logout'),
+    path('rango/', include('rango.urls')),
+    path('accounts/', include('registration.backends.simple.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),  
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

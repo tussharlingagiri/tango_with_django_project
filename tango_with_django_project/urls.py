@@ -20,12 +20,24 @@ from django.urls import path
 from django.urls import include
 from rango import views
 from django.contrib.auth.views import LogoutView
+from registration.backends.simple.views import RegistrationView
+from django.urls import reverse
+
+class MyRegistrationView(RegistrationView):
+    template_name = 'registration/registration_form.html'
+    def get_success_url(self,user):
+        return reverse('rango:profile_registration')
+    
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.index, name='index'),
     path('accounts/logout/', LogoutView.as_view(template_name='registration/logout.html'), name='logout'),
     path('rango/', include('rango.urls')),
+    path('accounts/register/', 
+         MyRegistrationView.as_view(),
+         name='registration_register'),
+    
     path('accounts/', include('registration.backends.simple.urls')),
     path('accounts/', include('django.contrib.auth.urls')),  
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

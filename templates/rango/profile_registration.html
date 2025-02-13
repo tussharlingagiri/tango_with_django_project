@@ -1,0 +1,20 @@
+{% extends 'rango/base.html' %}
+{% load static %} 
+
+{% block title_block%}
+    Profile Registartion 
+{% endblock %}
+
+{% block body_block %}
+<div class="jumbotron p-4">
+    <div class="row">
+        <form method="post"
+                action="{% url 'rango:register' %}"
+                enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input type="submit" value="Create Profile" />
+        </form>
+    </div>
+</div>
+{% endblock %}

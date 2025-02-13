@@ -19,6 +19,8 @@
                     {% for hidden in form.hidden_fields %}
                         {{ hidden }}
                     {% endfor %}
+
+                    <!-- Render Form Fields -->
                     {% for field in form.visible_fields %}
                         <div class="form-group">
                             {{ field.label_tag }}

@@ -149,6 +149,5 @@ REGISTRATION_AUTO_LOGIN = True
 
 LOGIN_REDIRECT_URL = 'rango:index'
 
-LOGIN_URL = 'auth_login'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
